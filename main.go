@@ -20,10 +20,7 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"log/syslog"
 	"os"
-	"strings"
 
 	"github.com/LINBIT/linstor-flexvolume/pkg/api"
 )
@@ -41,19 +38,9 @@ func main() {
 		os.Exit(0)
 	}
 
-	sysLog, err := syslog.New(syslog.LOG_INFO, "Linstor FlexVolume")
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.SetOutput(sysLog)
-
-	log.Printf("called with %s: %s", apiCall, strings.Join(os.Args[2:], ", "))
-
 	api := api.FlexVolumeApi{}
 
 	out, ret := api.Call(os.Args[1:])
-
-	log.Printf("responded to %s: %s", os.Args[1], out)
 
 	fmt.Print(out)
 	os.Exit(ret)

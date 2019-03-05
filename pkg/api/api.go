@@ -22,8 +22,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
-	"log/syslog"
 	"os"
 	"strconv"
 	"strings"
@@ -128,15 +126,6 @@ func parseOptions(s string) (options, error) {
 }
 
 var logOutput io.Writer
-
-func init() {
-	out, err := syslog.New(syslog.LOG_INFO, "Linstor FlexVolume")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	logOutput = out
-}
 
 type FlexVolumeApi struct {
 	action string
